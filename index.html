@@ -11,42 +11,47 @@
             font-weight: bold;
         }
         .operators{
-            background-color: rgb(169, 195, 184);
+            background-color: rgb(167, 185, 185);
         }
         .calc{
             position: relative;
             top: 5rem;
             padding: 1rem 1rem;
-            background-color: rgb(125, 220, 217);
+            background-color: rgba(159, 170, 155, 0.669);
             width: 30%;
             padding: 2rem 1rem;
-            margin: 1rem 22rem;
+            margin: 1rem 25rem;
         }
         #error {
-            color: rgb(113, 56, 56);
+            color: rgb(234, 68, 68);
         }
         .hi {
             border: 1px solid rgb(109, 93, 93);
             padding: 3px;
         }
         #oper{
-            padding: 4px 15px;
+            padding: 8.5px 122px;
             position: relative;
-            left: 130px;
+            left: 88px;
             border-radius: 4px;
-
+        }
+        .nums input{
+            padding: 8px 60px;
+            text-align: center;
         }
         #but1{
             margin-left: 9rem;
+            padding: 0.6rem 1rem;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
     </style>
 </head>
 <body>
     <div class="calc">
     <div class="nameHeader">
-        <h3>Calculator app</h3>
+        <h3>A Simple Calculator app</h3>
     </div>
-    <p>
+    <p class="nums">
         <b>1st number</b>: <input type="text" id="operand1"/>
     </p>
     <p>
@@ -56,10 +61,11 @@
               <option value="minus">-</option>
               <option value="multiply">*</option>
               <option value="divide">/</option>
+              <option value="reminder">%</option>
             </select>   
     </p>
-    <p>
-        <b>2nd number</b>: <input type="text" id="operand2"/>
+    <p class="nums">
+        <b>2ndnumber</b>: <input type="text" id="operand2"/>
     </p>
     <p>
         <b>Result</b>: <span id="result"></span>
@@ -78,7 +84,7 @@
             let num2 = document.getElementById("operand2").value;
              // sanity check if field is empty or non numeric values are inserted
              if (num1.length == 0 || num2.length ==0){
-                document.getElementById("error").innerHTML = "Error! Blank fields, please enter values"
+                document.getElementById("error").innerHTML = "Error! Blank fields, Please enter numeric values."
                 return
             }
             else if (isNaN(num1) || isNaN(num2)){
@@ -107,9 +113,19 @@
             else if(selectedOperator.value == "divide"){
                 if (parseInt(num2) == 0){
                     document.getElementById("error").innerHTML = "undefined! Division by zero"
-                    return  
+                    result = "" 
+                }else{
+                    result = parseInt(num1) / parseInt(num2)
                 }
-                result = parseInt(num1) / parseInt(num2)
+            }
+            else if (selectedOperator.value == "reminder"){
+                if (parseInt(num2) == 0){
+                    document.getElementById("error").innerHTML = "undefined! Modules by zero"
+                    result = "" 
+                }
+                else{
+                    result = parseInt(num1) % parseInt(num2)
+                }
             }
            
             document.getElementById("result").innerHTML = result

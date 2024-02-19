@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator app</title>
+    <style>
+        #error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h3>Calculator app</h3>
+    <p>X + Y = Z</p>
+    <p>
+        <b>X</b>: <input type="text" id="operand1"/>
+    </p>
+    <p>
+        <b>+</b>
+    </p>
+    <p>
+        <b>Y</b>: <input type="text" id="operand2"/>
+    </p>
+    <p>
+        <b>Z</b>: <span id="result"></span>
+    </p>
+    <p>
+        <b>error:</b><span id="error">...</span>
+    </p>
+    <p>
+        <input type="button" value="Calculator" onclick="Calculate()">
+    </p>
+
+    <script>
+        function Calculate(){
+            let errorMsg
+            let num1 = document.getElementById("operand1").value;
+            let num2 = document.getElementById("operand2").value;
+            let result = 0
+            result = parseInt(num1) + parseInt(num2)
+            if (num1.length == 0 || num2.length ==0){
+                document.getElementById("error").innerHTML = "Error! Black fields, please put values in both fields"
+
+            }
+            else if (isNaN(num1) || isNaN(num2)){
+                errodocument.getElementById("error").innerHTMLrMsg = "Value Not a number"
+            }
+            else {
+                document.getElementById("error").innerHTML = "..."
+            }
+            console.log(result)
+           
+            document.getElementById("result").innerHTML = result
+        }
+        
+    </script>
+</body>
+</html>
