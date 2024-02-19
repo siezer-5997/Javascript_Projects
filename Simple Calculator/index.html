@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator app</title>
+
+    <style>
+        .nameHeader {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: bold;
+        }
+        .operators{
+            background-color: rgb(169, 195, 184);
+        }
+        .calc{
+            position: relative;
+            top: 5rem;
+            padding: 1rem 1rem;
+            background-color: rgb(125, 220, 217);
+            width: 30%;
+            padding: 2rem 1rem;
+            margin: 1rem 22rem;
+        }
+        #error {
+            color: rgb(113, 56, 56);
+        }
+        .hi {
+            border: 1px solid rgb(109, 93, 93);
+            padding: 3px;
+        }
+        #oper{
+            padding: 4px 15px;
+            position: relative;
+            left: 130px;
+            border-radius: 4px;
+
+        }
+        #but1{
+            margin-left: 9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="calc">
+    <div class="nameHeader">
+        <h3>Calculator app</h3>
+    </div>
+    <p>
+        <b>1st number</b>: <input type="text" id="operand1"/>
+    </p>
+    <p>
+            <!-- <label for="cars">Operator</label> -->
+            <select class="operators" name="operands" id="oper">
+              <option value="plus">+</option>
+              <option value="minus">-</option>
+              <option value="multiply">*</option>
+              <option value="divide">/</option>
+            </select>   
+    </p>
+    <p>
+        <b>2nd number</b>: <input type="text" id="operand2"/>
+    </p>
+    <p>
+        <b>Result</b>: <span id="result"></span>
+    </p>
+    <p>
+        <b>Error: </b><span id="error" class="hi">...</span>
+    </p>
+    <p>
+        <input type="button" id="but1" value="Calculator" onclick="Calculate()">
+    </p>
+</div>
+    <script>
+        function Calculate(){
+
+            let num1 = document.getElementById("operand1").value;
+            let num2 = document.getElementById("operand2").value;
+             // sanity check if field is empty or non numeric values are inserted
+             if (num1.length == 0 || num2.length ==0){
+                document.getElementById("error").innerHTML = "Error! Blank fields, please enter values"
+                return
+            }
+            else if (isNaN(num1) || isNaN(num2)){
+                document.getElementById("error").innerHTML = "Value not a number!"
+                return
+            }
+            else {
+                document.getElementById("error").innerHTML = "..."
+            }
+
+            // Calculate the result of the operations by checking the selected option
+            let res = document.getElementById("oper")
+            let selected_index = res.selectedIndex
+            let selectedOperator = res.options[selected_index]
+            console.log(selectedOperator.value)
+            let result = 0 // initialize result to 0
+            if (selectedOperator.value == "plus"){
+                result = parseInt(num1) + parseInt(num2)
+            }
+            else if(selectedOperator.value == "minus"){
+                result = parseInt(num1) - parseInt(num2)
+            }
+            else if(selectedOperator.value == "multiply"){
+                result = parseInt(num1) * parseInt(num2)
+            }
+            else if(selectedOperator.value == "divide"){
+                if (parseInt(num2) == 0){
+                    document.getElementById("error").innerHTML = "undefined! Division by zero"
+                    return  
+                }
+                result = parseInt(num1) / parseInt(num2)
+            }
+           
+            document.getElementById("result").innerHTML = result
+
+        }
+        
+    </script>
+</body>
+</html>
