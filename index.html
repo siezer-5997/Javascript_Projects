@@ -48,41 +48,42 @@
 </head>
 <body>
     <div class="calc">
-    <div class="nameHeader">
-        <h3>A Simple Calculator app</h3>
+        <div class="nameHeader">
+            <h3>A Simple Calculator app</h3>
+        </div>
+        <p class="nums">
+            <b>1st number</b>: <input type="text" id="operand1"/>
+        </p>
+        <p>
+                <!-- <label for="cars">Operator</label> -->
+                <select class="operators" name="operands" id="oper">
+                <option value="plus">+</option>
+                <option value="minus">-</option>
+                <option value="multiply">*</option>
+                <option value="divide">/</option>
+                <option value="reminder">%</option>
+                </select>   
+        </p>
+        <p class="nums">
+            <b>2ndnumber</b>: <input type="text" id="operand2"/>
+        </p>
+        <p>
+            <b>Result</b>: <span id="result"></span>
+        </p>
+        <p>
+            <b>Error: </b><span id="error" class="hi">...</span>
+        </p>
+        <p>
+            <input type="button" id="but1" value="Calculate" onclick="Calculate()">
+        </p>
     </div>
-    <p class="nums">
-        <b>1st number</b>: <input type="text" id="operand1"/>
-    </p>
-    <p>
-            <!-- <label for="cars">Operator</label> -->
-            <select class="operators" name="operands" id="oper">
-              <option value="plus">+</option>
-              <option value="minus">-</option>
-              <option value="multiply">*</option>
-              <option value="divide">/</option>
-              <option value="reminder">%</option>
-            </select>   
-    </p>
-    <p class="nums">
-        <b>2ndnumber</b>: <input type="text" id="operand2"/>
-    </p>
-    <p>
-        <b>Result</b>: <span id="result"></span>
-    </p>
-    <p>
-        <b>Error: </b><span id="error" class="hi">...</span>
-    </p>
-    <p>
-        <input type="button" id="but1" value="Calculator" onclick="Calculate()">
-    </p>
-</div>
     <script>
         function Calculate(){
-
+            // upon clicking the button 'Calculate' this function will be invocked
             let num1 = document.getElementById("operand1").value;
             let num2 = document.getElementById("operand2").value;
              // sanity check if field is empty or non numeric values are inserted
+             //send an error message if the input is not numeric or blank
              if (num1.length == 0 || num2.length ==0){
                 document.getElementById("error").innerHTML = "Error! Blank fields, Please enter numeric values."
                 return
@@ -94,13 +95,12 @@
             else {
                 document.getElementById("error").innerHTML = "..."
             }
-
             // Calculate the result of the operations by checking the selected option
             let res = document.getElementById("oper")
             let selected_index = res.selectedIndex
-            let selectedOperator = res.options[selected_index]
-            console.log(selectedOperator.value)
-            let result = 0 // initialize result to 0
+            let selectedOperator = res.options[selected_index] // get the value of the selected operator
+            //console.log(selectedOperator.value)
+            let result = 0 // initialize result to 0, and holds the result of the operation
             if (selectedOperator.value == "plus"){
                 result = parseInt(num1) + parseInt(num2)
             }
@@ -127,9 +127,8 @@
                     result = parseInt(num1) % parseInt(num2)
                 }
             }
-           
+            // send the result to the p tag with id result and change the inner HTML to the value of result
             document.getElementById("result").innerHTML = result
-
         }
         
     </script>
